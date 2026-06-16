@@ -55,14 +55,14 @@ export const STICKERS = [
   { img: danielImage, x: "20%", y: "26%", r: 4, s: 1.8 },
 ];
 
-// Liste des hommes à classer (Bilel doit rester #1)
 export const INITIAL_MEN = [
-  { id: "bilel", name: "Bilel 👑" },
+  { id: "bilel", name: "Bilel" },
   { id: "brad", name: "Jacob Elordi" },
   { id: "henry", name: "Henry Cavill" },
   { id: "ryan", name: "Ryan Gosling" },
-  { id: "timo", name: "Raul Araujo" },
+  { id: "timo", name: "Rauw Alejandro" },
+  { id: "bunny", name: "Bad Bunny" },
 ];
 
-// Date de votre premier date (année, mois, jour) — mois commence à 0, donc 11 = décembre
+// Date de votre premier date
 export const FIRST_DATE = new Date(2025, 11, 4, 0, 0, 0);
