@@ -3,8 +3,8 @@ import FlipPhoneSVG from "../FlipPhoneSVG.jsx";
 import useSound from "../components/useSound.js";
 import { RetroWindow } from "../components/Ui.jsx";
 import { CompatTest, Typewriter } from "../components/Bonus.jsx";
-import Wheel from "../components/wheel.jsx";
-import LoveTimer from "../components/loveTimer.jsx";
+import Wheel from "../components/Wheel.jsx";
+import LoveTimer from "../components/LoveTimer.jsx";
 import { CODE, LOVE_LETTER, POEM, POEM_SIGNATURE } from "../data/content.js";
 
 // >>> Pour AJOUTER une application, copie une ligne ici <<<
@@ -15,62 +15,22 @@ const APPS = [
   { id: "wheel", icon: "🎡", label: "Roue de la chance" },
 ];
 
-// Marguerite Y2K dessinée en SVG (le sticker fleur des années 2000)
-function Daisy({ size = 26 }) {
-  const petals = [0, 45, 90, 135, 180, 225, 270, 315];
+// Fenêtre complète façon OS rétro (en-tête + cadre + fond)
+function SectionWindow({ title, children }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 40 40" className="shrink-0">
-      <g transform="translate(20,20)">
-        {petals.map((deg) => (
-          <ellipse key={deg} cx="0" cy="-11" rx="4.5" ry="8" fill="#fff"
-            stroke="#ff8fc7" strokeWidth="1.2" transform={`rotate(${deg})`} />
-        ))}
-        <circle cx="0" cy="0" r="6" fill="#ffd84d" stroke="#f5b301" strokeWidth="1.2" />
-      </g>
-    </svg>
-  );
-}
-const Bow = () => (
-  <span className="text-xl sm:text-2xl drop-shadow-[2px_2px_0px_rgba(219,39,119,0.4)]">
-    🎀
-  </span>
-);
-const Butterfly = () => (
-  <span className="text-xl sm:text-2xl drop-shadow-md ">
-    🦋
-  </span>
-);
-
-// Séparateur fleuri très 2000s
-function FlowerDivider({ children }) {
-  return (
-    <div className="flex items-center justify-center gap-2 w-full max-w-md my-1">
-      <Butterfly />
-      <Butterfly />
-      <Butterfly />
-      <Bow />
-      <Daisy />
-      <Daisy />
-      <Daisy />
-      <span
-        className="whitespace-nowrap px-3 text-base sm:text-lg font-black"
-        style={{
-          fontFamily: "'Comic Sans MS', cursive",
-          background: "linear-gradient(90deg,#ff6ad5,#d14fff,#7b2ff7)",
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-          color: "transparent",
-        }}
-      >
-        {children}
-      </span>
-      <Daisy />
-      <Daisy />
-      <Daisy />
-      <Bow />
-      <Butterfly />
-      <Butterfly />
-      <Butterfly />
+    <div
+      className="w-full max-w-md rounded-md border-2 overflow-hidden shadow-[4px_4px_0_rgba(120,90,160,0.4)]"
+      style={{ borderColor: "#c9c9d6", background: "linear-gradient(180deg,#ffffff 0%,#fdf0ff 55%,#f6e2ff 100%)" }}
+    >
+      <div className="flex items-center justify-between px-3 py-1.5" style={{ background: "linear-gradient(90deg,#7b2ff7,#d14fff,#ff6ad5)" }}>
+        <span className="text-sm font-bold text-white drop-shadow select-none truncate">{title}</span>
+        <div className="flex gap-1">
+          <span className="grid h-4 w-4 place-items-center rounded-[3px] border border-white/70 bg-[#e6e6ef] text-[9px] font-bold text-gray-700">_</span>
+          <span className="grid h-4 w-4 place-items-center rounded-[3px] border border-white/70 bg-[#e6e6ef] text-[9px] font-bold text-gray-700">▢</span>
+          <span className="grid h-4 w-4 place-items-center rounded-[3px] border border-white/70 bg-[#ffb3c8] text-[9px] font-bold text-gray-800">✕</span>
+        </div>
+      </div>
+      <div className="p-4 flex flex-col items-center gap-4">{children}</div>
     </div>
   );
 }
@@ -126,8 +86,7 @@ export default function Layer1({ onComplete }) {
         Indice 1 : Le jour où tout a commencé... 🗓️
       </p>
 
-      {/* ===== SECTION CODE / TÉLÉPHONE ===== */}
-      <FlowerDivider>Déverrouille le téléphone</FlowerDivider>
+      {/* ===== TÉLÉPHONE (libre, sans fenêtre) ===== */}
       <div className={`flex justify-center ${shake ? "animate-[shaker_0.4s_ease]" : ""}`}>
         <FlipPhoneSVG currentEntry={entry.padEnd(4, "•")} statusText={status} onKey={handleKey} />
       </div>
@@ -138,23 +97,25 @@ export default function Layer1({ onComplete }) {
         </button>
       )}
 
-      {/* ===== SECTION APPLICATIONS ===== */}
-      <FlowerDivider>Mes applications</FlowerDivider>
-      <div className="flex flex-wrap items-center justify-center gap-3 max-w-lg">
-        {APPS.map((g) => (
-          <button
-            key={g.id}
-            onClick={() => { snd.pop(); setPopup(g.id); }}
-            className="rounded-2xl border-2 border-white bg-gradient-to-r from-fuchsia-400 to-pink-500 px-4 py-3 text-sm font-bold text-white shadow-[2px_2px_0_rgba(150,110,190,0.5)] active:translate-y-[2px]"
-          >
-            {g.icon} {g.label}
-          </button>
-        ))}
-      </div>
+      {/* ===== FENÊTRE APPLICATIONS ===== */}
+      <SectionWindow title="mes_apps.exe">
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          {APPS.map((g) => (
+            <button
+              key={g.id}
+              onClick={() => { snd.pop(); setPopup(g.id); }}
+              className="rounded-2xl border-2 border-white bg-gradient-to-r from-fuchsia-400 to-pink-500 px-4 py-3 text-sm font-bold text-white shadow-[2px_2px_0_rgba(150,110,190,0.5)] active:translate-y-[2px]"
+            >
+              {g.icon} {g.label}
+            </button>
+          ))}
+        </div>
+      </SectionWindow>
 
-      {/* ===== SECTION TIMER (tout en bas) ===== */}
-      <FlowerDivider>Depuis la premiére fois qu'on s'est vu</FlowerDivider>
-      <LoveTimer />
+      {/* ===== FENÊTRE TIMER ===== */}
+      <SectionWindow title="lovetimer.exe">
+        <LoveTimer />
+      </SectionWindow>
 
       {hintOpen && (
         <RetroWindow title="quiz_secret.exe" className="w-full max-w-xs" onClose={() => setHintOpen(false)}>

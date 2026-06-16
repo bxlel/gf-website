@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { STICKERS } from "../data/content.js";
 
-// ---------- Drapeaux SVG (Inchangés) ----------
+// ---------- Drapeaux SVG ----------
 export function FlagPT({ size = 36 }) {
   return (
     <svg width={size} height={size * 0.67} viewBox="0 0 60 40" className="drop-shadow-[2px_2px_0_rgba(255,255,255,0.6)]">
@@ -25,46 +25,31 @@ export function FlagTN({ size = 36 }) {
   );
 }
 
-// ---------- Stickers éparpillés + drapeaux (CORRIGÉ) ----------
+// ---------- Stickers (emoji OU image) + drapeaux ----------
 export function Stickers() {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden z-10">
-      {/* Drapeaux fixes */}
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
       <span className="absolute select-none" style={{ left: "4%", top: "12%", transform: "rotate(-12deg)", animation: "floaty 5s ease-in-out infinite" }}>
         <FlagPT />
       </span>
       <span className="absolute select-none" style={{ left: "89%", top: "16%", transform: "rotate(10deg)", animation: "floaty 6s ease-in-out 0.3s infinite" }}>
         <FlagTN />
       </span>
-
-      {/* Boucle sur le tableau STICKERS (data/content.js) */}
       {STICKERS.map((s, i) => (
         <span
           key={i}
-          // J'ai ajouté 'flex items-center justify-center' pour un centrage parfait de l'image
-          className="absolute select-none drop-shadow-[2px_2px_0_rgba(255,255,255,0.6)] flex items-center justify-center"
+          className="absolute select-none drop-shadow-[2px_2px_0_rgba(255,255,255,0.6)]"
           style={{
             left: s.x,
             top: s.y,
-            // fontSize gère la taille des émojis
-            fontSize: `${2 * s.s}rem`,
             transform: `rotate(${s.r}deg)`,
             animation: `floaty ${4 + (i % 4)}s ease-in-out ${i * 0.2}s infinite`,
+            fontSize: s.img ? undefined : `${2 * s.s}rem`,
           }}
         >
-          {/* LA SOLUTION EST ICI : */}
           {s.img ? (
-            // Si le sticker a une propriété 'img', on affiche la balise <img>
-            <img 
-              src={s.img} 
-              alt="Sticker décoratif" 
-              // La taille de l'image s'adapte aussi au 's' (scale) défini dans content.js
-              style={{ width: `${4 * s.s}rem`, height: 'auto' }} 
-              className="object-contain"
-              draggable="false" 
-            />
+            <img src={s.img} alt="" style={{ width: `${48 * s.s}px`, height: "auto" }} />
           ) : (
-            // Sinon (s'il a une propriété 'e'), on affiche l'émoji texte
             s.e
           )}
         </span>
@@ -73,7 +58,7 @@ export function Stickers() {
   );
 }
 
-// ---------- Étoiles scintillantes (Inchangés) ----------
+// ---------- Étoiles scintillantes ----------
 export function Sparkles({ count = 22 }) {
   const items = useRef(
     Array.from({ length: count }, () => ({
@@ -98,7 +83,7 @@ export function Sparkles({ count = 22 }) {
   );
 }
 
-// ---------- Bandeau doré permanent (Inchangés) ----------
+// ---------- Bandeau doré permanent ----------
 export function GoldBanner() {
   return (
     <div className="relative z-20 w-full text-center pt-3 pb-1">
