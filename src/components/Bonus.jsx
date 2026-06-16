@@ -63,7 +63,7 @@ export function CompatTest({ onClose }) {
       {rejected && (
         <div className="mt-3 animate-[pop_0.3s_ease] rounded border-2 border-red-300 bg-red-50 px-3 py-2 text-center">
           <div className="text-3xl">😡</div>
-          <p className="text-xs font-black text-red-600 mt-1">Erreur : le seul résultat valable est "Bilel". Réessaie 💅</p>
+          <p className="text-xs font-black text-red-600 mt-1">Erreur : Tu as mis autre chose que Bilel là ?? </p>
         </div>
       )}
 
