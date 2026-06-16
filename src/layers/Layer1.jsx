@@ -3,8 +3,8 @@ import FlipPhoneSVG from "../FlipPhoneSVG.jsx";
 import useSound from "../components/useSound.js";
 import { RetroWindow } from "../components/Ui.jsx";
 import { CompatTest, Typewriter } from "../components/Bonus.jsx";
-import Wheel from "../components/Wheel.jsx";
-import LoveTimer from "../components/LoveTimer.jsx";
+import Wheel from "../components/wheel.jsx";
+import LoveTimer from "../components/loveTimer.jsx";
 import { CODE, LOVE_LETTER, POEM, POEM_SIGNATURE } from "../data/content.js";
 
 // >>> Pour AJOUTER une application, copie une ligne ici <<<

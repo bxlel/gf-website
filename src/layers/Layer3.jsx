@@ -16,7 +16,7 @@ export default function Layer3({ onComplete }) {
 
   return (
     <div className="relative z-20 flex w-full max-w-lg flex-col items-center gap-4 px-3">
-      <RetroWindow title="C:\\Windows\\expo_insolite.exe" className="w-full">
+      <RetroWindow title="C:\\Windows\\invitation_expo.exe" className="w-full">
         <div className="flex items-start gap-3">
           <span className="text-3xl">🖼️</span>
           <p className="text-base sm:text-lg font-bold text-purple-800">
