@@ -2,18 +2,20 @@ import React, { useState, useRef } from "react";
 import useSound from "./useSound.js";
 import { RetroWindow } from "./Ui.jsx";
 
+// Mise à jour de la liste avec le Foulard
 const SEGMENTS = [
   "Un bisou 💋",
   "Un calin 🤗",
   "Sephora 100€ 💳",
-  "Un ciné 🎬",
+  "Foulard 🧣",
   "1 claque 🛑",
   "Un massage 💆‍♀️",
   "Un resto 🍝",
   "Plein d'essence ⛽"
 ];
 
-const ALLOWED_WIN_INDEXES = [0, 1, 4]; 
+// Ajout des index 3 (Foulard) et 5 (Massage) dans les résultats possibles
+const ALLOWED_WIN_INDEXES = [0, 1, 3, 4, 5]; 
 
 const COLORS = [
   "#ff8fc7", "#c89bff", "#ff6ad5", "#a78bfa", 
@@ -140,8 +142,7 @@ export default function Wheel({ onClose }) {
                 : "La roue a parlé, prépare-toi ! 💖"}
             </p>
           </div>
-          
-          {/* Le bouton Recommencer qui s'affiche à la fin du spin */}
+
           <button 
             onClick={spin} 
             className="rounded-full border-2 border-gray-300 bg-gradient-to-r from-gray-100 to-gray-200 px-5 py-1.5 text-xs font-bold text-gray-700 shadow-[1px_1px_0_rgba(0,0,0,0.15)] active:translate-y-[1px]"
