@@ -5,10 +5,12 @@ import { RetroWindow } from "../components/Ui.jsx";
 import { CompatTest, Typewriter } from "../components/Bonus.jsx";
 import Wheel from "../components/Wheel.jsx";
 import LoveTimer from "../components/LoveTimer.jsx";
+import RestoMap from "../components/RestoMap.jsx";
 import { CODE, LOVE_LETTER, POEM, POEM_SIGNATURE } from "../data/content.js";
 
 // >>> Pour AJOUTER une application, copie une ligne ici <<<
 const APPS = [
+  { id: "restos", icon: "🗺️", label: "Nos restos" },
   { id: "poem", icon: "📜", label: "Un poème" },
   { id: "love", icon: "💌", label: "Mot secret" },
   { id: "compat", icon: "💘", label: "Test de compatibilité" },
@@ -139,6 +141,7 @@ export default function Layer1({ onComplete }) {
       {popup && (
         <div className="fixed inset-0 z-40 grid place-items-center bg-black/30 px-4 py-6 overflow-auto" onClick={() => setPopup(null)}>
           <div onClick={(e) => e.stopPropagation()}>
+            {popup === "restos" && <RestoMap onClose={() => setPopup(null)} />}
             {popup === "compat" && <CompatTest onClose={() => setPopup(null)} />}
             {popup === "poem" && <Typewriter onClose={() => setPopup(null)} title="poeme.txt" content={POEM} ctaLabel="Lire le poème 📜" endLabel={POEM_SIGNATURE} />}
             {popup === "love" && <Typewriter onClose={() => setPopup(null)} title="lettre_damour.txt" content={LOVE_LETTER} ctaLabel="Lire le mot ✍️" endLabel="💌 Écrit avec amour" />}

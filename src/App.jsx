@@ -12,9 +12,11 @@ export default function App() {
   const next = () => setLayer((l) => l + 1);
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden" style={{ background: "linear-gradient(135deg,#ffd6f5 0%,#e3d0ff 35%,#d6ecff 70%,#fff0fb 100%)" }}>
+    <div
+      className="relative min-h-screen w-full overflow-hidden"
+      style={{ background: "linear-gradient(135deg,#ffd6ee 0%,#ffb3da 50%,#ff8fc7 100%)" }}
+    >
       <GlobalStyles />
-      <div className="pointer-events-none absolute inset-0 opacity-40" style={{ background: "linear-gradient(115deg,transparent 30%,rgba(255,255,255,.6) 45%,rgba(180,230,255,.5) 55%,transparent 70%)", backgroundSize: "200% 200%", animation: "shine 6s linear infinite" }} />
       <Sparkles />
       <Stickers />
       <GoldBanner />
