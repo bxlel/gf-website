@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import useSound from "./useSound.js";
-import { RetroWindow } from "./Ui.jsx";
 import { COMPAT_MSGS } from "../data/content.js";
 
 // ---------- Test de compatibilité (accepte seulement "Bilel") ----------
-export function CompatTest({ onClose }) {
+export function CompatTest() {
   const snd = useSound();
   const [n1, setN1] = useState("");
   const [n2, setN2] = useState("Ana");
@@ -53,7 +52,7 @@ export function CompatTest({ onClose }) {
   };
 
   return (
-    <RetroWindow title="amour_calculator.exe" className="w-full max-w-md" onClose={onClose}>
+    <div className="w-full">
       <div className="flex items-center gap-2">
         <input value={n1} onChange={(e) => setN1(e.target.value)} placeholder="Prénom 1" className="w-full rounded-lg border-2 border-pink-300 bg-white px-3 py-2 text-sm outline-none focus:border-fuchsia-500" />
         <span className="text-xl">💕</span>
@@ -63,7 +62,7 @@ export function CompatTest({ onClose }) {
       {rejected && (
         <div className="mt-3 animate-[pop_0.3s_ease] rounded border-2 border-red-300 bg-red-50 px-3 py-2 text-center">
           <div className="text-3xl">😡</div>
-          <p className="text-xs font-black text-red-600 mt-1">Erreur : Tu as mis autre chose que Bilel là ?? </p>
+          <p className="text-xs font-black text-red-600 mt-1">Erreur : Tu as mis autre chose que Bilel là ??</p>
         </div>
       )}
 
@@ -94,12 +93,12 @@ export function CompatTest({ onClose }) {
           </button>
         </div>
       )}
-    </RetroWindow>
+    </div>
   );
 }
 
 // ---------- Machine à écrire (poème ou mot d'amour) ----------
-export function Typewriter({ onClose, title, content, ctaLabel = "Lire ✍️", endLabel = "💌 Écrit avec amour" }) {
+export function Typewriter({ title, content, ctaLabel = "Lire ✍️", endLabel = "💌 Écrit avec amour" }) {
   const snd = useSound();
   const [text, setText] = useState("");
   const [started, setStarted] = useState(false);
@@ -123,7 +122,7 @@ export function Typewriter({ onClose, title, content, ctaLabel = "Lire ✍️", 
   };
 
   return (
-    <RetroWindow title={title} className="w-full max-w-md" onClose={onClose}>
+    <div className="w-full">
       <div
         className="min-h-[150px] max-h-[50vh] overflow-auto whitespace-pre-wrap rounded-lg border-2 px-4 py-3 text-sm leading-relaxed text-purple-900"
         style={{ borderColor: "#e9d5ff", background: "linear-gradient(180deg,#fffdf7,#fff4fb)", fontFamily: "'Courier New', monospace" }}
@@ -141,6 +140,6 @@ export function Typewriter({ onClose, title, content, ctaLabel = "Lire ✍️", 
       ) : done ? (
         <p className="mt-3 text-center text-xs font-bold text-fuchsia-600">{endLabel}</p>
       ) : null}
-    </RetroWindow>
+    </div>
   );
 }

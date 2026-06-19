@@ -26,15 +26,20 @@ export function FlagTN({ size = 36 }) {
 }
 
 // ---------- Stickers (emoji OU image) + drapeaux ----------
-export function Stickers() {
+// showFlags : si false, on cache les drapeaux (ex: une fois sur le bureau).
+export function Stickers({ showFlags = true }) {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
-      <span className="absolute select-none" style={{ left: "4%", top: "12%", transform: "rotate(-12deg)", animation: "floaty 5s ease-in-out infinite" }}>
-        <FlagPT />
-      </span>
-      <span className="absolute select-none" style={{ left: "89%", top: "16%", transform: "rotate(10deg)", animation: "floaty 6s ease-in-out 0.3s infinite" }}>
-        <FlagTN />
-      </span>
+      {showFlags && (
+        <>
+          <span className="absolute select-none" style={{ left: "4%", top: "12%", transform: "rotate(-12deg)", animation: "floaty 5s ease-in-out infinite" }}>
+            <FlagPT />
+          </span>
+          <span className="absolute select-none" style={{ left: "89%", top: "16%", transform: "rotate(10deg)", animation: "floaty 6s ease-in-out 0.3s infinite" }}>
+            <FlagTN />
+          </span>
+        </>
+      )}
       {STICKERS.map((s, i) => (
         <span
           key={i}
